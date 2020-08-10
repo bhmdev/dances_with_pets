@@ -1,15 +1,12 @@
-DROP TABLE IF EXISTS pet_types;
-DROP TABLE IF EXISTS pets;
 DROP TABLE IF EXISTS adoption_applications;
+DROP TABLE IF EXISTS pets;
+DROP TABLE IF EXISTS pet_types;
 
-CREATE TABLE adoption_applications (
+CREATE TABLE pet_types (
   id SERIAL PRIMARY KEY,
-  applicant_name VARCHAR(50) NOT NULL,
-  applicant_email VARCHAR(255) NOT NULL,
-  applicant_phone VARCHAR(20),
-  applicant_home_status VARCHAR(5),
-  application_status VARCHAR(8),
-  pet_id INTEGER REFERENCES pets(id) NOT NULL
+  pet_type_name VARCHAR(50) NOT NULL,
+  pet_category_name VARCHAR(30),
+  pet_breed_name VARCHAR(50)
 );
 
 CREATE TABLE pets (
@@ -23,9 +20,12 @@ CREATE TABLE pets (
   pet_type_id INTEGER REFERENCES pet_types(id) NOT NULL
 );
 
-CREATE TABLE pet_types (
+CREATE TABLE adoption_applications (
   id SERIAL PRIMARY KEY,
-  pet_type_name VARCHAR(50) NOT NULL,
-  pet_category_name VARCHAR(30),
-  pet_breed_name VARCHAR(50)
+  applicant_name VARCHAR(50) NOT NULL,
+  applicant_email VARCHAR(255) NOT NULL,
+  applicant_phone VARCHAR(20),
+  applicant_home_status VARCHAR(5),
+  application_status VARCHAR(8),
+  pet_id INTEGER REFERENCES pets(id) NOT NULL
 );
