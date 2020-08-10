@@ -1,10 +1,10 @@
-INSERT INTO pets_types (pet_type_name, pet_category_name, pet_breed_name) VALUES ('cat', 'basic', 'domestic short hair');
-INSERT INTO pets_types (pet_type_name, pet_category_name, pet_breed_name) VALUES ('cat', 'basic', 'domestic medium hair');
-INSERT INTO pets_types (pet_type_name, pet_category_name, pet_breed_name) VALUES ('cat', 'basic', 'domestic long hair');
-INSERT INTO pets_types (pet_type_name, pet_category_name, pet_breed_name) VALUES ('dog', 'basic', 'German shepherd');
-INSERT INTO pets_types (pet_type_name, pet_category_name, pet_breed_name) VALUES ('dog', 'basic', 'maltipoo');
-INSERT INTO pets_types (pet_type_name, pet_category_name, pet_breed_name) VALUES ('tiger', 'exotic', 'Siberian');
-INSERT INTO pets_types (pet_type_name, pet_category_name, pet_breed_name) VALUES ('dragon', 'mythical', 'Slavic');
+INSERT INTO pet_types (pet_type_name, pet_category_name, pet_breed_name) VALUES ('cat', 'basic', 'domestic short hair');
+INSERT INTO pet_types (pet_type_name, pet_category_name, pet_breed_name) VALUES ('cat', 'basic', 'domestic medium hair');
+INSERT INTO pet_types (pet_type_name, pet_category_name, pet_breed_name) VALUES ('cat', 'basic', 'domestic long hair');
+INSERT INTO pet_types (pet_type_name, pet_category_name, pet_breed_name) VALUES ('dog', 'basic', 'German shepherd');
+INSERT INTO pet_types (pet_type_name, pet_category_name, pet_breed_name) VALUES ('dog', 'basic', 'maltipoo');
+INSERT INTO pet_types (pet_type_name, pet_category_name, pet_breed_name) VALUES ('tiger', 'exotic', 'Siberian');
+INSERT INTO pet_types (pet_type_name, pet_category_name, pet_breed_name) VALUES ('dragon', 'mythical', 'Slavic');
 
 INSERT INTO pets (pet_name, pet_thumbnail_url, pet_age, pet_vaccination_status, pet_adoption_story, pet_adoption_status, pet_type_id)
   VALUES ('Fiona', '/img/Fiona_01_450x600.png', '12|2', TRUE, E'She\'s a princess.', FALSE, 5);
