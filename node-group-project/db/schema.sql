@@ -5,8 +5,10 @@ DROP TABLE IF EXISTS pet_types;
 CREATE TABLE pet_types (
   id SERIAL PRIMARY KEY,
   pet_type_name VARCHAR(50) NOT NULL,
+  pet_type_thumbnail_url VARCHAR(255) NOT NULL,
   pet_category_name VARCHAR(30),
-  pet_breed_name VARCHAR(50)
+  pet_breed_name VARCHAR(50),
+  description TEXT
 );
 
 CREATE TABLE pets (
