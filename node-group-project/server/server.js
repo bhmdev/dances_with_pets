@@ -39,7 +39,7 @@ const pool = new pg.Pool({
 // API Endpoints 
 app.get("/api/v1/pets", (req, res) => {
   pool.connect().then(client => {
-  client.query("SELECT pet_type_name, description FROM pet_types;")
+  client.query("SELECT * FROM pet_types;")
   .then(result => {
     const petTypes = result.rows
     client.release()

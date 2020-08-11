@@ -3,7 +3,7 @@ INSERT INTO pet_types (pet_type_name, pet_type_thumbnail_url, pet_category_name,
 INSERT INTO pet_types (pet_type_name, pet_type_thumbnail_url, pet_category_name, pet_breed_name, description)
   VALUES ('cat', '/img/types/domestic-medium-hair.jpg', 'basic', 'domestic medium hair', 'A fluffy and docile cat, the domestic medium-hair is the perfect hybrid of his domestic short- and longhair relatives.');
 INSERT INTO pet_types (pet_type_name, pet_type_thumbnail_url, pet_category_name, pet_breed_name, description)
-  VALUES ('cat', '/img/types/domestic-long-hair', 'basic', 'domestic long hair', 'A cat of mixed ancestry, thus not belonging to any particular recognised cat breed, possessing a coat of semi-long to long fur.');
+  VALUES ('cat', '/img/types/domestic-long-hair.jpg', 'basic', 'domestic long hair', 'A cat of mixed ancestry, thus not belonging to any particular recognised cat breed, possessing a coat of semi-long to long fur.');
 INSERT INTO pet_types (pet_type_name, pet_type_thumbnail_url, pet_category_name, pet_breed_name, description)
   VALUES ('dog', '/img/types/german-shepherd.jpg', 'basic', 'German Shepherd', 'The German Shepherd is a breed of medium to large-sized working dog that originated in Germany.');
 INSERT INTO pet_types (pet_type_name, pet_type_thumbnail_url, pet_category_name, pet_breed_name, description)
