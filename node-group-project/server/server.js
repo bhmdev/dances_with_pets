@@ -35,6 +35,16 @@ const pool = new pg.Pool({
 })
 
 
+// API Endpoints 
+
+app.get('/api/v1/pets', (req, res) => {
+  res.json(getPets())
+})
+
+app.gete('/api/v1/pets/:id', (req, res) => {
+  
+})
+
 // Express routes
 app.get('*', (req, res) => {
   res.render("home")
