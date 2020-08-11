@@ -30,6 +30,8 @@ app.use(express.static(path.join(__dirname, "../public")))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
+app.set('json spaces', 2);
+
 const pool = new pg.Pool({
   connectionString: "postgres://postgres:password@127.0.0.1:5432/pets"
 })
@@ -41,7 +43,7 @@ app.get("/api/v1/pets", (req, res) => {
   .then(result => {
     const petTypes = result.rows
     client.release()
-    res.sendStatus(201).json({ petTypes: petTypes })
+    res.json({ petTypes: petTypes })
     })
     .catch(error => {
       res.sendStatus(500)
