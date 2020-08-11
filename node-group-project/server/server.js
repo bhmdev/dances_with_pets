@@ -37,16 +37,44 @@ const pool = new pg.Pool({
 
 // API Endpoints 
 
-app.get('/api/v1/pets', (req, res) => {
-  res.json(getPets())
+// app.get('/api/v1/pets', (req, res) => {
+  // res.json(getPets())
+// })
+
+// app.get('/api/v1/pets/:id', (req, res) => {
+//   const pet = getPets().find((pet) => {
+//       return pet.id == req.params.id
+//   })
+//   if(pet) {
+//     res.json(pet)
+//   } else {
+//     res.status(404)
+//   }
+// })
+
+
+app.get("/api/v1/pets", (req, res) => {
+  pool.connect().then(client => {
+  client.query("SELECT pet_type_name, description FROM pet_types;")
+  .then(result => {
+    const petTypes = result.rows
+    client.release()
+    console.log("petTypes = ", petTypes) 
+    res.render("home", { petTypes: petTypes })
+  })
+})
 })
 
-app.gete('/api/v1/pets/:id', (req, res) => {
-  
-})
+
+
+
 
 // Express routes
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
+  res.redirect("/pets")
+
+})
+app.get('/pets', (req, res) => {
   res.render("home")
 })
 
