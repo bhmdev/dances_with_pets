@@ -51,12 +51,87 @@ app.get("/api/v1/pets", (req, res) => {
   })
 })
 
+app.get("/api/v1/pets/categories/", (req, res) => {
+  pool.connect().then(client => {
+  client.query("SELECT DISTINCT ON (pet_category_name) pet_category_name, id FROM pet_types ORDER BY pet_category_name;")
+  .then(result => {
+    const petGroups = result.rows
+    client.release()
+    res.json({ petGroups: petGroups })
+    })
+    .catch(error => {
+      res.sendStatus(500)
+    })
+  })
+})
+
+app.get("/api/v1/pets/types/", (req, res) => {
+  pool.connect().then(client => {
+  client.query("SELECT DISTINCT ON (pet_type_name) pet_type_name, id FROM pet_types ORDER BY pet_type_name;")
+  .then(result => {
+    const petGroups = result.rows
+    client.release()
+    res.json({ petGroups: petGroups })
+    })
+    .catch(error => {
+      res.sendStatus(500)
+    })
+  })
+})
+
+app.get("/api/v1/pets/breeds/", (req, res) => {
+  pool.connect().then(client => {
+  client.query("SELECT DISTINCT ON (pet_breed_name) pet_breed_name, id FROM pet_types ORDER BY pet_breed_name;")
+  .then(result => {
+    const petGroups = result.rows
+    client.release()
+    res.json({ petGroups: petGroups })
+    })
+    .catch(error => {
+      res.sendStatus(500)
+    })
+  })
+})
+
+app.get("/api/v1/pets/adopt/", (req, res) => {
+  pool.connect().then(client => {
+  client.query("SELECT * FROM pets;")
+  .then(result => {
+    const pets = result.rows
+    client.release()
+    res.json({ pets: pets })
+    })
+    .catch(error => {
+      res.sendStatus(500)
+    })
+  })
+})
+
+app.get("/api/v1/pets/adopt/:id", (req, res) => {
+  console.log(req.params.id)
+  pool.connect().then(client => {
+  client.query(`SELECT * FROM pets WHERE pet_name = '${req.params.id}';`)
+  .then(result => {
+    const pet = result.rows
+    client.release()
+    res.json({ pet: pet })
+    })
+    .catch(error => {
+      res.sendStatus(500)
+    })
+  })
+})
+
 // Express routes
 app.get('/', (req, res) => {
   res.redirect("/pets")
 })
 
 app.get('/pets', (req, res) => {
+  res.render("home")
+})
+
+app.get('/pets/adopt/:id', (req, res) => {
   res.render("home")
 })
 
