@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 
 import PetTypeTile from "./PetTypeTile"
 
-const ArticlesIndexContainer = props => {
+const PetTypeIndexContainer = props => {
   const [pets, setPets] = useState([])
 
   // Fetch all articles
@@ -48,41 +48,4 @@ const ArticlesIndexContainer = props => {
   )
 }
 
-export default ArticlesIndexContainer
-
-
-
-// const petTypeTiles = pets.map(petType, index => {
-// key={index+1}
-
-
-
-  // import ArticleTile from "./ArticleTile"
-  // import ArticleFormContainer from "./ArticleFormContainer"
-    // // FETCH POST LOGIC
-    // const handleArticleFormSubmission = payload => {
-    //   fetch('/api/v1/articles', {
-    //     method: 'POST',
-    //     body: JSON.stringify(payload),
-    //     headers: {'Content-Type': 'application/json'}
-    //   })
-    //   .then(response => {
-    //     if (response.ok) {
-    //       return response;
-    //     } else {
-    //       let errorMessage = `${response.status} (${response.statusText})`,
-    //        error = new Error(errorMessage);
-    //       throw(error);
-    //     }
-    //   })
-    //   .then(response => response.json())
-    //   .then(body => {
-    //     setArticles([...articles, body.article]);
-    //   })
-    //   .catch(error => console.error(`Error in fetch: ${error.message}`));
-    // }
-
-  // const articleTiles = articles.map(article => {
-
-
-{/* <ArticleFormContainer handleFormSubmission={handleArticleFormSubmission} /> */}
+export default PetTypeIndexContainer
