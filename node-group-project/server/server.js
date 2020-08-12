@@ -113,6 +113,9 @@ app.get('/', (req, res) => {
 app.get('/grouping/:type', (req, res) => {
   res.render("home")
 })
+app.get('/adopt', (req, res) => {
+  res.render("home")
+})
 
 app.get('/pets', (req, res) => {
   res.render("home")
