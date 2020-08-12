@@ -82,8 +82,8 @@ app.get("/api/v1/breed/:groupingId", (req, res) => {
 })
 
 const getPetsByAdoptionStatus = (res, adoptionStatus = 'FALSE') => {
-  const queryString = `SELECT pets.id, name, pet_img_url, age, vaccination_status, adoption_story, adoption_status, ` + 
-  `classification, type, breed FROM pets INNER JOIN pet_types ON pet_type_id = pet_types.id WHERE adoption_status = ${adoptionStatus};`;
+  const queryString = `SELECT pets.id, name, pet_img_url, age, vaccination_status, adoption_story, adoption_status, ` +
+    `classification, type, breed FROM pets INNER JOIN pet_types ON pet_type_id = pet_types.id WHERE adoption_status = ${adoptionStatus};`;
   pool.connect().then(client => {
     client.query(queryString)
       .then(result => {
@@ -113,7 +113,12 @@ app.get('/', (req, res) => {
 app.get('/grouping/:type', (req, res) => {
   res.render("home")
 })
+
 app.get('/adopt', (req, res) => {
+  res.render("home")
+})
+
+app.get('/surrender', (req, res) => {
   res.render("home")
 })
 
