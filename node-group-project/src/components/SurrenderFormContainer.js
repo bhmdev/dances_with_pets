@@ -95,7 +95,7 @@ const SurrenderFormContainer = props => {
           </select>
         </label>
         <label>Pet Image:
-        <input
+          <input
             type="text"
             name="petImage"
             value={newSurrenderApplication.petImage}
