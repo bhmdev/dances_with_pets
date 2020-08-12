@@ -48,7 +48,7 @@ const ApplicationFormContainer = props => {
             name="title"
             value={newApplication.title}
             onChange={handleChange}
-            ></input>
+       ></input>
         </label>
         <label>Email:
           <input
@@ -82,7 +82,3 @@ const ApplicationFormContainer = props => {
 }
 
 export default ApplicationFormContainer
-
-
-
-
