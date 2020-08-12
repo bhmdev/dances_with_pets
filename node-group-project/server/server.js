@@ -41,7 +41,6 @@ app.get("/api/v1/grouping/:type", (req, res) => {
   const targetGroup = req.params.type
   const queryString = `SELECT ${targetGroup === 'breed' ? 'breed' : `DISTINCT ON (${targetGroup}) ${targetGroup}`}, ` +
     `id FROM pet_types ORDER BY ${targetGroup === 'breed' ? 'classification, type, breed' : `${targetGroup}`};`
-  console.log(queryString)
   pool.connect().then(client => {
     client.query(queryString)
       .then(result => {
