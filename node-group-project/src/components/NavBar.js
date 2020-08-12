@@ -2,15 +2,20 @@ import React from "react"
 import { Switch, Route, Link } from "react-router-dom"
 import PetTypeIndexContainer from "./PetTypeIndexContainer"
 import GroupingIndexContainer from "./GroupingIndexContainer"
+import ApplicationFormContainer from "./ApplicationFormContainer"
 
 const NavBar = props => {
+  const addNewApplication = () => {
+    console.log("this should appear...hopefully")
+  }
+  const adoptionForm = <ApplicationFormContainer addNewApplication={addNewApplication} />
   return (
     <>
       <div className="top-bar">
         <div className="top-bar-left">
           <ul className="menu">
             <li><Link to="/" className="site-title">Dances with Pets</Link></li>
-            <li><Link to="#" className="vr-left navLink">Adopt</Link></li>
+            <li><Link to="/adopt" className="vr-left navLink">Adopt</Link></li>
             <li><Link to="#" className="navLink">Surrender</Link></li>
             <li className="vr-left">
               <div className="dropdown">
@@ -40,6 +45,7 @@ const NavBar = props => {
       <Switch>
         <Route exact path="/pets" component={PetTypeIndexContainer} />
         <Route exact path="/grouping/:type" component={GroupingIndexContainer} />
+        <Route exact path="/adopt" component={ApplicationFormContainer}  addNewApplication={addNewApplication} />
       </Switch>
     </>
   )
