@@ -37,15 +37,15 @@ INSERT INTO pets (name, pet_img_url, age, vaccination_status, adoption_story, ad
   VALUES ('Pon Rerlman', '/img/pets/Pon-Rerlman_01_450x600.jpg', '1185|11', FALSE, 'Pon Rerlman, sometimes known as Pon Pon, is the life of the party. He will steal your heart and your tacos!', FALSE, 10);
 
 INSERT INTO adoption_applications (name, phone_number, email, home_status, application_status, pet_id)
-  VALUES ('Tom Murphy', '707-555-8666', 'murphy-codes@github.com', 'rent', 'approved', 5);
+  VALUES ('Tom Murphy', '707-555-8666', 'murphy-codes@github.com', 'rent', 'pending', 5);
 INSERT INTO adoption_applications (name, phone_number, email, home_status, application_status, pet_id)
-  VALUES ('Russ Moore', '415-555-7877', 'wrmoore@github.com', 'rent', 'approved', 2);
+  VALUES ('Russ Moore', '415-555-7877', 'wrmoore@github.com', 'rent', 'pending', 2);
 INSERT INTO adoption_applications (name, phone_number, email, home_status, application_status, pet_id)
-  VALUES ('Brendan M', '617-555-2626', 'bhmdev@github.com', 'own', 'approved', 1);
+  VALUES ('Brendan M', '617-555-2626', 'bhmdev@github.com', 'own', 'pending', 1);
 INSERT INTO adoption_applications (name, phone_number, email, home_status, application_status, pet_id)
   VALUES ('Dan Alberts', '617-555-3286', 'danalberts@github.com', 'rent', 'denied', 6);
 INSERT INTO adoption_applications (name, phone_number, email, home_status, application_status, pet_id)
-  VALUES ('Patrick Whelan', '617-555-7973', 'prophetsfall@github.com', 'own', 'approved', 7);
+  VALUES ('Patrick Whelan', '617-555-7973', 'prophetsfall@github.com', 'own', 'pending', 7);
 INSERT INTO adoption_applications (name, phone_number, email, home_status, application_status, pet_id)
   VALUES ('Monica Gonzalez', '805-555-6466', 'mandm@cutepetexamples.com', 'rent', 'pending', 3);
 INSERT INTO adoption_applications (name, phone_number, email, home_status, application_status, pet_id)
