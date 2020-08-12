@@ -3,12 +3,15 @@ import { Switch, Route, Link } from "react-router-dom"
 import PetTypeIndexContainer from "./PetTypeIndexContainer"
 import GroupingIndexContainer from "./GroupingIndexContainer"
 import ApplicationFormContainer from "./ApplicationFormContainer"
+import SurrenderFormContainer from "./SurrenderFormContainer"
 
 const NavBar = props => {
-  const addNewApplication = () => {
-    console.log("this should appear...hopefully")
+  const addNewAdoptionApplication = () => {
+    alert("Adoption applications successfully committed")
   }
-  const adoptionForm = <ApplicationFormContainer addNewApplication={addNewApplication} />
+  const addNewSurrenderApplication = () => {
+    alert("Surrender applications successfully committed")
+  }
   return (
     <>
       <div className="top-bar">
@@ -16,7 +19,7 @@ const NavBar = props => {
           <ul className="menu">
             <li><Link to="/" className="site-title">Dances with Pets</Link></li>
             <li><Link to="/adopt" className="vr-left navLink">Adopt</Link></li>
-            <li><Link to="#" className="navLink">Surrender</Link></li>
+            <li><Link to="/surrender" className="navLink">Surrender</Link></li>
             <li className="vr-left">
               <div className="dropdown">
                 <Link to="#" className="nav-drop">Pets</Link>
@@ -45,7 +48,8 @@ const NavBar = props => {
       <Switch>
         <Route exact path="/pets" component={PetTypeIndexContainer} />
         <Route exact path="/grouping/:type" component={GroupingIndexContainer} />
-        <Route exact path="/adopt" component={ApplicationFormContainer}  addNewApplication={addNewApplication} />
+        <Route exact path="/adopt" component={ApplicationFormContainer} addNewApplication={addNewAdoptionApplication} />
+        <Route exact path="/surrender" component={SurrenderFormContainer} addNewApplication={addNewSurrenderApplication} />
       </Switch>
     </>
   )
