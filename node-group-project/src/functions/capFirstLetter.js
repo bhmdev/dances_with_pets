@@ -1,5 +1,3 @@
-import { capitalize } from "lodash"
-
 const capFirstLetter = (str) => {
   const words = str.split(' ');
   const capWords = words.map(word => {
