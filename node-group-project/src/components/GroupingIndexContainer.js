@@ -27,7 +27,7 @@ const GroupingIndexContainer = props => {
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
     }
-  }, [])
+  }, [targetGroup])
 
   const GroupingTiles = grouping.map(group => {
     return (
