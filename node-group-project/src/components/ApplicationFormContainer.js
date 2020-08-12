@@ -35,41 +35,37 @@ const ApplicationFormContainer = props => {
       <h2>Adoption Application</h2>
       <div>
         <label>Name:
-        <input
+          <input
             type="text"
             name="name"
             value={newApplication.name}
             onChange={handleChange}
-          >
-          </input>
+          ></input>
         </label>
         <label>Phone Number:
-        <input
+          <input
             type="text"
             name="title"
             value={newApplication.title}
             onChange={handleChange}
-          >
-          </input>
+            ></input>
         </label>
         <label>Email:
-        <input
+          <input
             type="text"
             name="title"
             value={newApplication.title}
             onChange={handleChange}
-          >
-          </input>
+          ></input>
         </label>
         <label>Home Status:
-        <input
+          <input
             type="text"
             name="title"
             value={newApplication.title}
             onChange={handleChange}
-          >
-          </input>
-          <label htmlFor="homeStatus">Select Home Status</label>
+          ></input>
+        <label htmlFor="homeStatus">Select Home Status</label>
           <select name="homeStatus" id="homeStatus" onChange={handleChange} value={newApplication.homeStatus}>
             <option value="default" disabled hidden>Select Home Status</option>
             <option value="own">Own</option>
