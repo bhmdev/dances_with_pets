@@ -102,17 +102,12 @@ app.get("/api/v1/past-pets", (req, res) => {
 app.get("/api/v1/pets/:petName", (req, res) => {
   const queryString = `SELECT pets.id, name, pet_img_url, age, vaccination_status, adoption_story, adoption_status, ` + 
     `classification, type, breed FROM pets INNER JOIN pet_types ON pet_type_id = pet_types.id WHERE name = '${req.params.petName}'`;
-    console.log("req.params.petName = \"" + req.params.petName + "\"")
-  console.log("queryString = ", queryString)
   getPets(res, queryString);
 })
 
 
 app.post('/api/v1/adoption-application', (req, res) => {
-  console.log("POST: \n/api/v1/adoption-application \nREACHED\n\n")
-  console.log("req.body = ", req.body)
   const adoptionValues = Object.values(req.body);
-  console.log("adoptionValues = ", adoptionValues)
   adoptionValues[4] = parseInt(adoptionValues[4]);
   adoptionValues.push('pending');
   const queryString = "INSERT INTO adoption_applications (name, phone_number, email, home_status, pet_id, application_status) VALUES ($1, $2, $3, $4, $5, $6)";
