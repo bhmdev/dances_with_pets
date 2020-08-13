@@ -1,12 +1,16 @@
 import React, { useState } from "react"
+// import ErrorList from "./ErrorList"
 
 const ApplicationFormContainer = props => {
-  const [newApplication, setNewApplication] = useState({
-    Name: "",
-    PhoneNumber: "",
-    Email: "",
-    HomeStatus: "default"
-  })
+  const emptyApplication = {
+    name: "",
+    phoneNumber: "",
+    email: "",
+    homeStatus: "",
+    petId: ""
+  };
+
+  let [newApplication, setNewApplication] = useState(emptyApplication)
 
   const handleChange = event => {
     setNewApplication({
@@ -16,28 +20,27 @@ const ApplicationFormContainer = props => {
   }
 
   const handleSubmit = event => {
-    event.preventDefault()
-    props.addApplication(newApplication)
-    clearForm()
+    // alert("form submitted! :)")
+    console.log("form submitted! :)")
+    // event.preventDefault()
+    // props.addApplication(newApplication)
+    // clearForm()
   }
 
   const clearForm = () => {
-    setNewApplication({
-      Name: "",
-      PhoneNumber: "",
-      Email: "",
-      HomeStatus: ""
-    })
+    console.log("form cleared! :)")
+    setNewApplication(emptyApplication)
   }
 
   return (
-    <form onSubmit={handleSubmit} className="new-application-form callout">
+    <form action="/adopt" method="POST" onSubmit={handleSubmit} className="new-application-form callout">
+      {/* <ErrorList errors={errors} /> */}
       <h2>Adoption Application</h2>
       <div>
         <label>Name:
           <input
             type="text"
-            name="name"
+            name="application[name]"
             value={newApplication.name}
             onChange={handleChange}
           ></input>
@@ -45,31 +48,30 @@ const ApplicationFormContainer = props => {
         <label>Phone Number:
           <input
             type="text"
-            name="title"
-            value={newApplication.title}
+            name="application[phone_number]"
+            value={newApplication.phoneNumber}
             onChange={handleChange}
        ></input>
         </label>
         <label>Email:
           <input
             type="text"
-            name="title"
-            value={newApplication.title}
+            name="application[email]"
+            value={newApplication.email}
             onChange={handleChange}
           ></input>
         </label>
-        <label>Home Status:
-          <input
-            type="text"
-            name="title"
-            value={newApplication.title}
-            onChange={handleChange}
-          ></input>
-        <label htmlFor="homeStatus">Select Home Status</label>
-          <select name="homeStatus" id="homeStatus" onChange={handleChange} value={newApplication.homeStatus}>
+        <label>Select Home Status
+          <select name="application[home_status]" onChange={handleChange} value={newApplication.homeStatus}>
             <option value="default" disabled hidden>Select Home Status</option>
+            <option value="rent">Rent</option>
             <option value="own">Own</option>
-            <option value="adopt">Adopt</option>
+          </select>
+        </label>
+        <label>Select Pet
+          <select name="application[pet_id]" onChange={handleChange} value={newApplication.petId}>
+            <option value="default" disabled hidden>Select Home Status</option>
+            <option value={newApplication.petId}>Shadow</option>
           </select>
         </label>
       </div>

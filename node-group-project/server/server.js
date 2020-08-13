@@ -110,6 +110,10 @@ app.get('/', (req, res) => {
   res.render("home")
 })
 
+app.get('/pets', (req, res) => {
+  res.render("home")
+})
+
 app.get('/grouping/:type', (req, res) => {
   res.render("home")
 })
@@ -122,7 +126,40 @@ app.get('/surrender', (req, res) => {
   res.render("home")
 })
 
-app.get('/pets', (req, res) => {
+app.post('/adopt', (req, res) => {
+  const application = req.body.application;
+  const errors = [];
+  Object.keys(application).filter(key => application[key] === "").map(key => {
+    if (key = 'name') {errors.push(`Your name is required for our records.`)}
+    else if (key = 'email') {errors.push(`Your email is required contact information.`)}
+    else if (key = 'phoneNumber') {errors.push(`Your phone number is required contact information.`)}
+    else if (key = 'homeStatus') {errors.push(`Your home status is required to determine eligibility`)}
+    else {errors.push(`You must select the pet you wish to adopt!`)}
+  })
+  if (errors.length === 0) {
+    const adoptionValues = Object.values(application);
+    adoptionValues[4] = parseInt(adoptionValues[4]);
+    adoptionValues.push('pending');
+    pool
+      .query(
+        "INSERT INTO adoption_applications (name, phone_number, email, home_status, pet_id, application_status) VALUES ($1, $2, $3, $4, $5, $6);",
+        adoptionValues
+      )
+      .then(result => {
+        res.redirect("/adopt")
+      })
+      .catch(err => {
+        console.log(err)
+        res.sendStatus(500)
+      })
+  } else {
+    // res.render("home", { application: application, errors: errors })
+    // res.status(422).json({ name: ["Fields can't be blank"] })
+    res.status(422).json({ application: application, errors: errors })
+  }
+})  
+
+app.post('/surrender', (req, res) => {
   res.render("home")
 })
 
