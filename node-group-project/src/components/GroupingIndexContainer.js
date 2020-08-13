@@ -29,7 +29,7 @@ const GroupingIndexContainer = props => {
     }
   }, [targetGroup])
 
-  const GroupingTiles = grouping.map(group => {
+  const groupingTiles = grouping.map(group => {
     return (
       <GroupingTile
         key={group.id}
@@ -45,7 +45,7 @@ const GroupingIndexContainer = props => {
         <div className="small-8 small-centered columns">
           <h1 className="center-text">View our pet {props.match.params.type}!</h1>
           <hr />
-          {GroupingTiles}
+          {groupingTiles}
         </div>
       </div>
     )

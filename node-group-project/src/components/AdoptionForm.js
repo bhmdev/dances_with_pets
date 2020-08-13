@@ -1,4 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+
+import AdoptionTile from "./AdoptionTile"
 
 const AdoptionForm = props => {
   const emptyApplication = {
@@ -9,7 +11,8 @@ const AdoptionForm = props => {
     pet_id: "default"
   };
 
-  let [newApplication, setNewApplication] = useState(emptyApplication);
+  const [newApplication, setNewApplication] = useState(emptyApplication);
+  const [pets, setPets] = useState([]);
 
   const handleInputChange = event => {
     setNewApplication({
@@ -28,6 +31,36 @@ const AdoptionForm = props => {
     event.preventDefault();
     setNewApplication(emptyApplication)
   }
+
+  useEffect(() => { 
+    let fetchString = `/api/v1/pets`;
+    if (props.petName) { fetchString += `:${props.petName}`; }
+    fetch(fetchString)
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage);
+        throw (error);
+      }
+    })
+    .then(response => response.json())
+    .then(content => {
+      setPets(content.pets)
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }, [])
+
+  const adoptionTiles = pets.map(pet => {
+    return (
+      <AdoptionTile
+        key={pet.id}
+        petId={pet.id}
+        petName={pet.name}
+      />
+    )
+  })
 
   return (
     <form onSubmit={handleSubmit} className="new-application-form callout">
@@ -65,9 +98,9 @@ const AdoptionForm = props => {
           </select>
         </label>
         <label>Select Pet *
-          <select name="pet_id" onChange={handleInputChange} value={newApplication.petId}>
-            <option value="default" disabled hidden>Select Home Status</option>
-            <option value={newApplication.petId}>Shadow</option>
+          <select name="pet_id" onChange={handleInputChange} value={newApplication.pet_id}>
+            <option value="default" disabled hidden>Select a pet to adopt</option>
+            {adoptionTiles}
           </select>
         </label>
       </div>

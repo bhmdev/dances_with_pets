@@ -54,8 +54,7 @@ app.get("/api/v1/grouping/:type", (req, res) => {
   })
 })
 
-const getPetsByType = (res, grouping, groupingId, adoptionStatus = 'FALSE') => {
-  const queryString = `SELECT * FROM pets INNER JOIN pet_types ON pet_type_id = pet_types.id WHERE adoption_status = ${adoptionStatus} AND ${grouping} = '${groupingId}'`;
+const getPets = (res, queryString) => {
   pool.connect().then(client => {
     client.query(queryString)
       .then(result => {
@@ -67,6 +66,17 @@ const getPetsByType = (res, grouping, groupingId, adoptionStatus = 'FALSE') => {
         res.sendStatus(500)
       })
   })
+}
+
+const getPetsByType = (res, grouping, groupingId, adoptionStatus = 'FALSE') => {
+  const queryString = `SELECT * FROM pets INNER JOIN pet_types ON pet_type_id = pet_types.id WHERE adoption_status = ${adoptionStatus} AND ${grouping} = '${groupingId}'`;
+  getPets(res, queryString);
+}
+
+const getPetsByAdoptionStatus = (res, adoptionStatus = 'FALSE') => {
+  const queryString = `SELECT pets.id, name, pet_img_url, age, vaccination_status, adoption_story, adoption_status, ` +
+    `classification, type, breed FROM pets INNER JOIN pet_types ON pet_type_id = pet_types.id WHERE adoption_status = ${adoptionStatus};`;
+  getPets(res, queryString);
 }
 
 app.get("/api/v1/classification/:groupingId", (req, res) => {
@@ -81,22 +91,6 @@ app.get("/api/v1/breed/:groupingId", (req, res) => {
   getPetsByType(res, 'breed', req.params.groupingId)
 })
 
-const getPetsByAdoptionStatus = (res, adoptionStatus = 'FALSE') => {
-  const queryString = `SELECT pets.id, name, pet_img_url, age, vaccination_status, adoption_story, adoption_status, ` +
-    `classification, type, breed FROM pets INNER JOIN pet_types ON pet_type_id = pet_types.id WHERE adoption_status = ${adoptionStatus};`;
-  pool.connect().then(client => {
-    client.query(queryString)
-      .then(result => {
-        const pets = result.rows
-        client.release()
-        res.json({ pets: pets })
-      })
-      .catch(error => {
-        res.sendStatus(500)
-      })
-  })
-}
-
 app.get("/api/v1/pets", (req, res) => {
   getPetsByAdoptionStatus(res)
 })
@@ -104,6 +98,13 @@ app.get("/api/v1/pets", (req, res) => {
 app.get("/api/v1/past-pets", (req, res) => {
   getPetsByAdoptionStatus(res, 'TRUE')
 })
+
+app.get("/api/v1/pets/:petName", (req, res) => {
+  const queryString = `SELECT pets.id, name, pet_img_url, age, vaccination_status, adoption_story, adoption_status, ` + 
+    `classification, type, breed FROM pets INNER JOIN pet_types ON pet_type_id = pet_types.id WHERE name = '${req.params.petName}'`;
+  getPets(res, queryString);
+})
+
 
 app.post('/api/v1/adoption-application', (req, res) => {
   const adoptionValues = Object.values(req.body);
