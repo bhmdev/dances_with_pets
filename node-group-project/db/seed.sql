@@ -55,5 +55,5 @@ INSERT INTO adoption_applications (name, phone_number, email, home_status, appli
 INSERT INTO adoption_applications (name, phone_number, email, home_status, application_status, pet_id)
   VALUES ('Dan Alberts', '617-555-3286', 'danalberts@github.com', 'rent', 'pending', 8);
 
-INSERT INTO pet_surrender_applications (name, phone_number, email, pet_name, pet_type_id, pet_img_url, pet_age, vaccination_status, adoption_story, application_status)
+INSERT INTO surrender_applications (name, phone_number, email, pet_name, pet_type_id, pet_img_url, pet_age, vaccination_status, adoption_story, application_status)
   VALUES ('Dan Alberts', '617-555-3286', 'danalberts@github.com', 'Rocket', 6, '/img/pets/Rocket_01_450x600.jpg', '7|2', FALSE, E'Rocket is a VERY intelligent raccoon, but he\'s just a bit too much to handle.', 'pending');

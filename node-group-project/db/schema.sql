@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS pet_surrender_applications;
+DROP TABLE IF EXISTS surrender_applications;
 DROP TABLE IF EXISTS adoption_applications;
 DROP TABLE IF EXISTS pets;
 DROP TABLE IF EXISTS pet_types;
@@ -33,7 +33,7 @@ CREATE TABLE adoption_applications (
   pet_id INTEGER REFERENCES pets(id) NOT NULL
 );
 
-CREATE TABLE pet_surrender_applications (
+CREATE TABLE surrender_applications (
   id SERIAL PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
   phone_number VARCHAR(20) NOT NULL,
