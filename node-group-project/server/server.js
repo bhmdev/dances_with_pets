@@ -105,25 +105,45 @@ app.get("/api/v1/past-pets", (req, res) => {
   getPetsByAdoptionStatus(res, 'TRUE')
 })
 
+app.post('/api/v1/adoption-application', (req, res) => {
+  const adoptionValues = Object.values(req.body);
+  adoptionValues[4] = parseInt(adoptionValues[4]);
+  adoptionValues.push('pending');
+  const queryString = "INSERT INTO adoption_applications (name, phone_number, email, home_status, pet_id, application_status) VALUES ($1, $2, $3, $4, $5, $6)";
+  pool
+    .query(queryString, adoptionValues)
+    .then(result => {
+      res.sendStatus(201)
+    })
+    .catch(err => {
+      console.log(err)
+      res.sendStatus(500)
+    })
+})
+
+app.post('/api/v1/surrender-application', (req, res) => {
+  const surrenderValues = Object.values(req.body.application);
+  surrenderValues[4] = parseInt(surrenderValues[4]);
+  surrenderValues.push('pending');
+  const queryString = "INSERT INTO surrender_applications (name, phone_number, email, pet_name, pet_type_id, pet_img_url, pet_age, vaccination_status, adoption_story, application_status) " + 
+                      "VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)";
+  pool
+    .query(queryString, surrenderValues)
+    .then(result => {
+      res.sendStatus(201)
+    })
+    .catch(err => {
+      console.log(err)
+      res.sendStatus(500)
+    })
+})
+
 // Express routes
-app.get('/', (req, res) => {
-  res.render("home")
-})
-
-app.get('/grouping/:type', (req, res) => {
-  res.render("home")
-})
-
-app.get('/adopt', (req, res) => {
-  res.render("home")
-})
-
-app.get('/surrender', (req, res) => {
-  res.render("home")
-})
-
-app.get('/pets', (req, res) => {
-  res.render("home")
+const routes = ['/', '/grouping/:type', '/adopt', '/surrender', '/review-adoptions', '/review-surrender']
+routes.forEach(route => {
+  app.get(route, (req,res) => {
+    res.render("home")
+  })
 })
 
 app.listen(3000, "0.0.0.0", () => {

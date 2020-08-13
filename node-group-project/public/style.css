@@ -12,8 +12,18 @@
   margin: 0.125rem 0;
 }
 
-.grouping-tile {
-  text-align: center  ;
+.center-text {
+  text-align: center;
+}
+
+.margin-top-1 {
+  margin-top: 1rem;
+}
+
+#require-descriptor {
+  font-size: 0.70rem;
+  font-style: italic;
+  margin-left: 0.5rem;
 }
 
 /* NavBar */

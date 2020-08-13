@@ -9,7 +9,7 @@ const GroupingTile = props => {
   
   return (
     <div className="pet-type-tile">
-      <p className="grouping-tile"><Link to={`/pets/${props.group}`}>{group}</Link></p>
+      <p className="center-text"><Link to={`/pets/${props.group}`}>{group}</Link></p>
       <hr />
     </div>
   )

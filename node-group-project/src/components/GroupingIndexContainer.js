@@ -38,15 +38,12 @@ const GroupingIndexContainer = props => {
     )
   })
 
-  if (!found) {
-    return (
-      <Error404 error={`Sorry, but that grouping of pets doesn't exist at our shelter. Our groupings are: classification, type, & breed.`}/>
-    )
-  } else {
+  if (!found) { return <Error404 error={`Sorry, but that grouping of pets doesn't exist at our shelter. Our groupings are: classification, type, & breed.`}/> } 
+  else {
     return (
       <div className="row">
         <div className="small-8 small-centered columns">
-          <h1>View our pet {props.match.params.type}!</h1>
+          <h1 className="center-text">View our pet {props.match.params.type}!</h1>
           <hr />
           {GroupingTiles}
         </div>
