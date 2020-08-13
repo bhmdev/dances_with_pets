@@ -2,16 +2,9 @@ import React from "react"
 import { Switch, Route, Link } from "react-router-dom"
 import PetTypeIndexContainer from "./PetTypeIndexContainer"
 import GroupingIndexContainer from "./GroupingIndexContainer"
-import ApplicationFormContainer from "./ApplicationFormContainer"
-import SurrenderFormContainer from "./SurrenderFormContainer"
+import FormsContainer from "./FormsContainer"
 
 const NavBar = props => {
-  const addNewAdoptionApplication = () => {
-    alert("Adoption applications successfully committed")
-  }
-  const addNewSurrenderApplication = () => {
-    alert("Surrender applications successfully committed")
-  }
   return (
     <>
       <div className="top-bar">
@@ -48,10 +41,13 @@ const NavBar = props => {
       <Switch>
         <Route exact path="/pets" component={PetTypeIndexContainer} />
         <Route exact path="/grouping/:type" component={GroupingIndexContainer} />
-        <Route exact path="/adopt" component={ApplicationFormContainer} addNewApplication={addNewAdoptionApplication} />
-        <Route exact path="/surrender" component={SurrenderFormContainer} addNewApplication={addNewSurrenderApplication} />
+        <Route exact path="/adopt" render={() => <FormsContainer form={"adoption"} />} />
+        <Route exact path="/surrender" render={() => <FormsContainer form={"surrender"} />} />
+        <Route exact path="/review-adoptions" render={() => <FormsContainer form={"adoption-review"} />} />
+        <Route exact path="/review-surrenders" render={() => <FormsContainer form={"surrender-review"} />} />
       </Switch>
     </>
   )
 }
+
 export default NavBar

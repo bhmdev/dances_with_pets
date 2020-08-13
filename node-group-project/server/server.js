@@ -105,62 +105,45 @@ app.get("/api/v1/past-pets", (req, res) => {
   getPetsByAdoptionStatus(res, 'TRUE')
 })
 
+app.post('/api/v1/adoption-application', (req, res) => {
+  const adoptionValues = Object.values(req.body);
+  adoptionValues[4] = parseInt(adoptionValues[4]);
+  adoptionValues.push('pending');
+  const queryString = "INSERT INTO adoption_applications (name, phone_number, email, home_status, pet_id, application_status) VALUES ($1, $2, $3, $4, $5, $6)";
+  pool
+    .query(queryString, adoptionValues)
+    .then(result => {
+      res.sendStatus(201)
+    })
+    .catch(err => {
+      console.log(err)
+      res.sendStatus(500)
+    })
+})
+
+app.post('/api/v1/surrender-application', (req, res) => {
+  const surrenderValues = Object.values(req.body.application);
+  surrenderValues[4] = parseInt(surrenderValues[4]);
+  surrenderValues.push('pending');
+  const queryString = "INSERT INTO surrender_applications (name, phone_number, email, pet_name, pet_type_id, pet_img_url, pet_age, vaccination_status, adoption_story, application_status) " + 
+                      "VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)";
+  pool
+    .query(queryString, surrenderValues)
+    .then(result => {
+      res.sendStatus(201)
+    })
+    .catch(err => {
+      console.log(err)
+      res.sendStatus(500)
+    })
+})
+
 // Express routes
-app.get('/', (req, res) => {
-  res.render("home")
-})
-
-app.get('/pets', (req, res) => {
-  res.render("home")
-})
-
-app.get('/grouping/:type', (req, res) => {
-  res.render("home")
-})
-
-app.get('/adopt', (req, res) => {
-  res.render("home")
-})
-
-app.get('/surrender', (req, res) => {
-  res.render("home")
-})
-
-app.post('/adopt', (req, res) => {
-  const application = req.body.application;
-  const errors = [];
-  Object.keys(application).filter(key => application[key] === "").map(key => {
-    if (key = 'name') {errors.push(`Your name is required for our records.`)}
-    else if (key = 'email') {errors.push(`Your email is required contact information.`)}
-    else if (key = 'phoneNumber') {errors.push(`Your phone number is required contact information.`)}
-    else if (key = 'homeStatus') {errors.push(`Your home status is required to determine eligibility`)}
-    else {errors.push(`You must select the pet you wish to adopt!`)}
+const routes = ['/', '/grouping/:type', '/adopt', '/surrender', '/review-adoptions', '/review-surrender']
+routes.forEach(route => {
+  app.get(route, (req,res) => {
+    res.render("home")
   })
-  if (errors.length === 0) {
-    const adoptionValues = Object.values(application);
-    adoptionValues[4] = parseInt(adoptionValues[4]);
-    adoptionValues.push('pending');
-    pool
-      .query(
-        "INSERT INTO adoption_applications (name, phone_number, email, home_status, pet_id, application_status) VALUES ($1, $2, $3, $4, $5, $6);",
-        adoptionValues
-      )
-      .then(result => {
-        res.redirect("/adopt")
-      })
-      .catch(err => {
-        console.log(err)
-        res.sendStatus(500)
-      })
-  } else {
-    // res.render("home", { application: application, errors: errors })
-    // res.status(422).json({ name: ["Fields can't be blank"] })
-    res.status(422).json({ application: application, errors: errors })
-  }
-})  
-
-app.post('/surrender', (req, res) => {
-  res.render("home")
 })
 
 app.listen(3000, "0.0.0.0", () => {
