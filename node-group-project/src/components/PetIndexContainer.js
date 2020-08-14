@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react"
-
-import PetTypeTile from "./PetTypeTile"
+import PetTile from "./PetTile"
+import getPath from "../functions/getPath.js"
 
 const PetTypeIndexContainer = props => {
   const [pets, setPets] = useState([])
 
-  // Fetch all articles
   useEffect(() => {
+    let path = getPath()
+    let fetchString = `/api/v1/`;
+
     fetch('/api/v1/pets')
       .then(response => {
         if (response.ok) {
@@ -19,20 +21,33 @@ const PetTypeIndexContainer = props => {
       })
       .then(response => response.json())
       .then(body => {
-        setPets(body.petTypes);
+        setPets(body.pets);
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
   },[])
 
-  const petTypeTiles = pets.map(petType => {
+  // const petTypeTiles = pets.map(petType => {
+  //   return (
+  //     <PetTypeTile
+  //       key={petType.id}
+  //       name={petType.pet_type_name}
+  //       thumbnail={petType.pet_type_thumbnail_url}
+  //       category={petType.pet_category_name}
+  //       breed={petType.pet_breed_name}
+  //       description={petType.description}
+  //     />
+  //   )
+  // })
+
+  const petTiles = pets.map(pet => {
     return (
-      <PetTypeTile
-        key={petType.id}
-        name={petType.pet_type_name}
-        thumbnail={petType.pet_type_thumbnail_url}
-        category={petType.pet_category_name}
-        breed={petType.pet_breed_name}
-        description={petType.description}
+      <PetTile
+        key={pet.id}
+        name={pet.pet_type_name}
+        thumbnail={pet.pet_type_thumbnail_url}
+        category={pet.pet_category_name}
+        breed={pet.pet_breed_name}
+        description={pet.description}
       />
     )
   })
