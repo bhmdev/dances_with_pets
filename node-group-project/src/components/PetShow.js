@@ -1,13 +1,16 @@
 import React from "react"
+import ageToString from "../functions/ageToString.js"
 
 const PetShow = props => {
+  let age = ageToString(props.age);
+
   return (
     <div className="pet-show">
       <h2>{props.name}</h2>
-      <p>{props.ageYears} years and {props.ageMonths} months old</p>
+      <p>{age}</p>
       <img src={props.thumbnail} alt={`A {pet.pet_name}`}/>
-      <p>Vaccinated: {props.vaccination}</p>
-      <p>About {props.name}: {props.adoption}</p>
+      <p><br/>Vaccinated: {props.vaccination}</p>
+      <p>About {props.name}: {props.adoption_story}</p>
       <p>Breed: {props.breed}</p>
     </div>
   )

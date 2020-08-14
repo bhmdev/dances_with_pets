@@ -19,22 +19,22 @@ INSERT INTO pet_types (classification, type, breed, breed_img_url, description)
 INSERT INTO pet_types (classification, type, breed, breed_img_url, description)
   VALUES ('mythical', 'taco monkey', 'banana taco monkey', '/img/types/taco-monkey.jpg', E'The rare and ellusive taco monkey is a coveted pet amongst the Launchers. Legends say that if you catch one it\'ll tell you what\'s on a system check. The banana species of taco monkeys also eat bananas.');
 
-INSERT INTO pets (name, pet_img_url, age, vaccination_status, adoption_story, adoption_status, pet_type_id)
-  VALUES ('Fiona', '/img/pets/Fiona_01_450x600.png', '12|2', TRUE, E'She\'s a princess.', FALSE, 5);
-INSERT INTO pets (name, pet_img_url, age, vaccination_status, adoption_story, adoption_status, pet_type_id)
-  VALUES ('Midnight', '/img/pets/Midnight_01_450x600.jpg', '20|0', TRUE, E'She\'s a queen.', FALSE, 1);
-INSERT INTO pets (name, pet_img_url, age, vaccination_status, adoption_story, adoption_status, pet_type_id)
-  VALUES ('Mimosa', '/img/pets/Mimosa_01_450x600.jpg', '1|4', TRUE, E'She\'s a ferocious cuddler.', FALSE, 2);
-INSERT INTO pets (name, pet_img_url, age, vaccination_status, adoption_story, adoption_status, pet_type_id)
-  VALUES ('Merlot', '/img/pets/Merlot_01_450x600.jpg', '2|3', TRUE, E'He\'s a little angel.', FALSE, 1);
-INSERT INTO pets (name, pet_img_url, age, vaccination_status, adoption_story, adoption_status, pet_type_id)
-  VALUES ('Shadow', '/img/pets/Shadow_01_450x600.jpg', '1|10', TRUE, E'He\'s handsome goofball.', FALSE, 4);
-INSERT INTO pets (name, pet_img_url, age, vaccination_status, adoption_story, adoption_status, pet_type_id)
-  VALUES ('Cooper', '/img/pets/Cooper_01_450x600.jpg', '0|4', FALSE, 'Cooper is a cute little fluffball with claws. He loves cheese and Cheetos!', FALSE, 6);
-INSERT INTO pets (name, pet_img_url, age, vaccination_status, adoption_story, adoption_status, pet_type_id)
-  VALUES ('Felix', '/img/pets/Felix_01_450x600.jpg', '1185|11', FALSE, 'Felix the phoenix is guaranteed to bring some light and joy into your life! Believed to only be on this 3rd life, Felix is quite young.', FALSE, 8);
-INSERT INTO pets (name, pet_img_url, age, vaccination_status, adoption_story, adoption_status, pet_type_id)
-  VALUES ('Pon Rerlman', '/img/pets/Pon-Rerlman_01_450x600.jpg', '1185|11', FALSE, 'Pon Rerlman, sometimes known as Pon Pon, is the life of the party. He will steal your heart and your tacos!', FALSE, 10);
+INSERT INTO pets (name, pet_img_url, age, vaccination_status, description, adoption_story, adoption_status, pet_type_id)
+  VALUES ('Fiona', '/img/pets/Fiona_01_450x600.png', '12|2', TRUE, E'She\'s a princess.', 'Fiona is a cute and sleepy ball of fluff and cuddles. She deserves a good home!.', FALSE, 5);
+INSERT INTO pets (name, pet_img_url, age, vaccination_status, description, adoption_story, adoption_status, pet_type_id)
+  VALUES ('Midnight', '/img/pets/Midnight_01_450x600.jpg', '20|0', TRUE, E'She\'s a queen.', E'Midnight is fabulous and photogenic. If you\'re looking for the next #meowdel, look no further!', FALSE, 1);
+INSERT INTO pets (name, pet_img_url, age, vaccination_status, description, adoption_story, adoption_status, pet_type_id)
+  VALUES ('Mimosa', '/img/pets/Mimosa_01_450x600.jpg', '1|4', TRUE, E'She\'s a ferocious cuddler.', 'Mimosa loves to sleep and play. She is feisty and has a super cute, kittenesque face!', FALSE, 2);
+INSERT INTO pets (name, pet_img_url, age, vaccination_status, description, adoption_story, adoption_status, pet_type_id)
+  VALUES ('Merlot', '/img/pets/Merlot_01_450x600.jpg', '2|3', TRUE, E'He\'s a little angel.', 'Merlot is an extremely affectionate kitty that loves to cuddle. Be prepared to have your heart captured!', FALSE, 1);
+INSERT INTO pets (name, pet_img_url, age, vaccination_status, description, adoption_story, adoption_status, pet_type_id)
+  VALUES ('Shadow', '/img/pets/Shadow_01_450x600.jpg', '1|10', TRUE, E'He\'s handsome goofball.', 'Boundless energy and joy accompanies this puppy! If you want a hiking buddy, then Shadow is the pup for you!', FALSE, 4);
+INSERT INTO pets (name, pet_img_url, age, vaccination_status, description, adoption_story, adoption_status, pet_type_id)
+  VALUES ('Cooper', '/img/pets/Cooper_01_450x600.jpg', '0|4', FALSE, E'Perhaps the cutest trash panda you\'ll ever meet!', 'Cooper is a cute little fluffball with claws. He loves cheese and Cheetos!', FALSE, 6);
+INSERT INTO pets (name, pet_img_url, age, vaccination_status, description, adoption_story, adoption_status, pet_type_id)
+  VALUES ('Felix', '/img/pets/Felix_01_450x600.jpg', '1185|11', FALSE, 'In Soviet Russia, pet outlives you!', 'Believed to only be on this 3rd life, Felix is quite young. Felix the phoenix is guaranteed to bring some light and joy into your life!', FALSE, 8);
+INSERT INTO pets (name, pet_img_url, age, vaccination_status, description, adoption_story, adoption_status, pet_type_id)
+  VALUES ('Pon Rerlman', '/img/pets/Pon-Rerlman_01_450x600.jpg', '421|0', FALSE, 'A TacoMonkey, what more can you ask for?', 'Pon Rerlman, sometimes known as Pon Pon, is the life of the party. He will steal your heart and your tacos!', FALSE, 10);
 
 INSERT INTO adoption_applications (name, phone_number, email, home_status, application_status, pet_id)
   VALUES ('Tom Murphy', '707-555-8666', 'murphy-codes@github.com', 'rent', 'pending', 5);
@@ -55,5 +55,5 @@ INSERT INTO adoption_applications (name, phone_number, email, home_status, appli
 INSERT INTO adoption_applications (name, phone_number, email, home_status, application_status, pet_id)
   VALUES ('Dan Alberts', '617-555-3286', 'danalberts@github.com', 'rent', 'pending', 8);
 
-INSERT INTO surrender_applications (name, phone_number, email, pet_name, pet_type_id, pet_img_url, pet_age, vaccination_status, adoption_story, application_status)
-  VALUES ('Dan Alberts', '617-555-3286', 'danalberts@github.com', 'Rocket', 6, '/img/pets/Rocket_01_450x600.jpg', '7|2', FALSE, E'Rocket is a VERY intelligent raccoon, but he\'s just a bit too much to handle.', 'pending');
+INSERT INTO surrender_applications (name, phone_number, email, pet_name, pet_type_id, pet_img_url, pet_age, vaccination_status, description,  adoption_story, application_status)
+  VALUES ('Dan Alberts', '617-555-3286', 'danalberts@github.com', 'Rocket', 6, '/img/pets/Rocket_01_450x600.jpg', '7|2', FALSE, 'Rocket is a VERY intelligent raccoon.', E'Rocket\'s a great guy, but he\'s just a bit too much to handle and kind of has an explosive personality.', 'pending');
