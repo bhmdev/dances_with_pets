@@ -43,12 +43,12 @@ const PetTypeIndexContainer = props => {
   const petTiles = pets.map(pet => {
     return (
       <PetTile
-      key={pet.id}
-      name={pet.name}
-      breed={capFirstLetter(pet.breed)}
-      age={pet.age}
-      description={pet.description}
-      thumbnail={pet.pet_img_url}
+        key={pet.id}
+        name={pet.name}
+        breed={capFirstLetter(pet.breed)}
+        age={pet.age}
+        description={pet.description}
+        thumbnail={pet.pet_img_url}
       />
     )
   })

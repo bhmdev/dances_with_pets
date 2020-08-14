@@ -66,7 +66,6 @@ const NavBar = props => {
         <Route exact path="/type/:type" component={PetIndexContainer} />
         <Route exact path="/breed/:breed" component={PetIndexContainer} />
         <Route exact path="/employees" component={PetTypeIndexContainer} />
-        {/* <Route exact path="/grouping" render={() => <FormsContainer form={"adoption"} />} /> */}
         <Route exact path="/grouping" component={GroupingIndexContainer} />
         <Route exact path="/grouping/:type" component={GroupingIndexContainer} />
         <Route exact path="/adopt" render={() => <FormsContainer form={"adoption"} />} />
