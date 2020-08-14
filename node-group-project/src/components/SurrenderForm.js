@@ -114,7 +114,7 @@ const SurrenderForm = props => {
                 name="pet_age_months"
                 min="0" max="11" step="1"
                 placeholder="0"
-                value={newApplication.pet_age}
+                value={newApplication.pet_age_months}
                 onChange={handleInputChange}
               ></input>
             </label>
