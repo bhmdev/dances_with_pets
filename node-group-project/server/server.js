@@ -69,12 +69,14 @@ const getPets = (res, queryString) => {
 }
 
 const getPetsByType = (res, grouping, groupingId, adoptionStatus = 'FALSE') => {
-  const queryString = `SELECT * FROM pets INNER JOIN pet_types ON pet_type_id = pet_types.id WHERE adoption_status = ${adoptionStatus} AND ${grouping} = '${groupingId}'`;
+  const queryString = `SELECT pets.id AS id, name, pet_img_url, age, vaccination_status, pets.description AS description, adoption_story, ` + 
+                      `adoption_status, pet_type_id, classification, type, breed, breed_img_url, pet_types.description AS pet_type_description FROM pets ` + 
+                      `INNER JOIN pet_types ON pet_type_id = pet_types.id WHERE adoption_status = ${adoptionStatus} AND ${grouping} = '${groupingId}'`;
   getPets(res, queryString);
 }
 
 const getPetsByAdoptionStatus = (res, adoptionStatus = 'FALSE') => {
-  const queryString = `SELECT pets.id, name, pet_img_url, age, vaccination_status, adoption_story, adoption_status, ` +
+  const queryString = `SELECT pets.id, name, pet_img_url, age, vaccination_status, pets.description, adoption_story, adoption_status, ` +
     `classification, type, breed FROM pets INNER JOIN pet_types ON pet_type_id = pet_types.id WHERE adoption_status = ${adoptionStatus};`;
   getPets(res, queryString);
 }
@@ -123,11 +125,12 @@ app.post('/api/v1/adoption-application', (req, res) => {
 })
 
 app.post('/api/v1/surrender-application', (req, res) => {
-  const surrenderValues = Object.values(req.body.application);
-  surrenderValues[4] = parseInt(surrenderValues[4]);
+  const surrenderValues = Object.values(req.body);
+  const age = [surrenderValues.pop(),surrenderValues.pop()]
   surrenderValues.push('pending');
-  const queryString = "INSERT INTO surrender_applications (name, phone_number, email, pet_name, pet_type_id, pet_img_url, pet_age, vaccination_status, adoption_story, application_status) " + 
-                      "VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)";
+  surrenderValues.push(`${age.shift()}|${age.pop()}`);
+  const queryString = "INSERT INTO surrender_applications (name, phone_number, email, pet_name, pet_type_id, pet_img_url, vaccination_status, description, adoption_story, application_status, pet_age) " + 
+                      "VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)";
   pool
     .query(queryString, surrenderValues)
     .then(result => {
@@ -140,11 +143,15 @@ app.post('/api/v1/surrender-application', (req, res) => {
 })
 
 // Express routes
-const routes = ['/', '/grouping/:type', '/adopt', '/surrender', '/review-adoptions', '/review-surrender']
+const routes = ['/', '/pets', '/pets/:name', '/past-pets', '/classification/:classification', '/type/:type', '/breed/:breed', '/grouping/:type', '/adopt', '/surrender', '/employees', '/review-adoptions', '/review-surrenders']
 routes.forEach(route => {
   app.get(route, (req,res) => {
     res.render("home")
   })
+})
+
+app.get('*/*', (req,res) => {
+  res.render("home")
 })
 
 app.listen(3000, "0.0.0.0", () => {

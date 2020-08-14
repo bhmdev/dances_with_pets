@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react"
-
 import Error404 from "./Error404"
 import GroupingTile from "./GroupingTile"
+import getPath from "../functions/getPath.js"
 
 const GroupingIndexContainer = props => {
   const [grouping, setGrouping] = useState([]);
 
-  const targetGroup = props.match.params.type.substring(0,props.match.params.type.length-1);
-  const found = ['classification', 'type', 'breed'].includes(targetGroup);
+  const path = getPath();
+  let targetGroup;
+  if (path.length > 1) { targetGroup = props.match.params.type.substring(0,path[1].length-1); }
+  else { targetGroup = path[0] }
+  const found = ['grouping', 'classification', 'type', 'breed'].includes(targetGroup);
 
   useEffect(() => {
     if (found) {
-      fetch(`/api/v1/grouping/${targetGroup}`)
+      const fetchString = `/api/v1/${targetGroup === 'grouping' ? 'grouping' : `grouping/${targetGroup}`}`;
+      fetch(fetchString)
       .then(response => {
         if (response.ok) {
           return response;
@@ -33,12 +37,13 @@ const GroupingIndexContainer = props => {
     return (
       <GroupingTile
         key={group.id}
+        grouping={targetGroup}
         group={group[targetGroup]}
       />
     )
   })
 
-  if (!found) { return <Error404 error={`Sorry, but that grouping of pets doesn't exist at our shelter. Our groupings are: classification, type, & breed.`}/> } 
+  if (!found) { return <Error404 error={`Sorry, but that grouping of pets doesn't exist at our shelter. Our groupings are: classification, type, & breed.`} linkTo={`grouping`} /> } 
   else {
     return (
       <div className="row">

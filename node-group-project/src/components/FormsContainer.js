@@ -2,8 +2,8 @@ import React, { useState } from "react"
 import Error404 from "./Error404"
 import FormSuccess from "./FormSuccess"
 import AdoptionForm from "./AdoptionForm"
+import SurrenderForm from "./SurrenderForm"
 import AdoptionReviewForm from "./AdoptionForm"
-import SurrenderForm from "./SurrenderFormContainer"
 import SurrenderReviewForm from "./AdoptionForm"
 
 const FormsContainer = props => {
@@ -46,8 +46,8 @@ const FormsContainer = props => {
     return <FormSuccess formSuccessMessage={formSuccessMessage}/>
   }
   else if (props.form === "adoption") { return <AdoptionForm handleFormSubmission={handleFormSubmission} /> }
-  else if (props.form === "adoption-review") { return <AdoptionReviewForm handleFormSubmission={handleFormSubmission}/> }
   else if (props.form === "surrender") { return <SurrenderForm handleFormSubmission={handleFormSubmission}/> }
+  else if (props.form === "adoption-review") { return <AdoptionReviewForm handleFormSubmission={handleFormSubmission}/> }
   else if (props.form === "surrender-review") { return <SurrenderReviewForm handleFormSubmission={handleFormSubmission}/> }
   else { return <Error404 error={`Sorry, but that form doesn't exist!`} /> }
 }
